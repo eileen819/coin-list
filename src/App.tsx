@@ -1,3 +1,4 @@
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Outlet } from "react-router-dom";
@@ -12,7 +13,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     font-family: "Roboto Slab", serif;
     background-color: ${(props) => props.theme.bgColor};
-    color: ${(props) => props.theme.accentColor};
+    color: ${(props) => props.theme.textColor};
   }
   a {
     text-decoration: none;
@@ -31,6 +32,7 @@ function App() {
       </Helmet>
       <GlobalStyle />
       <Outlet />
+      <ReactQueryDevtools initialIsOpen={true} />
     </>
   );
 }
