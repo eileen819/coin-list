@@ -7,35 +7,43 @@ import {
   useParams,
 } from "react-router-dom";
 import styled from "styled-components";
-import { fetchCoinInfo, fetchTickersInfo } from "../api";
+import { fetchCoinHistorical, fetchCoinInfo, fetchTickersInfo } from "../api";
 import { Helmet } from "react-helmet-async";
+import {
+  IHistorical,
+  IInfoData,
+  ILocationState,
+  IParams,
+  IPriceData,
+} from "../interface";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "../atom";
 
 // styled-components
 const Container = styled.div`
   padding: 0px 20px;
-  max-width: 1040px;
+  max-width: 480px;
   margin: 0 auto;
 `;
-const Header = styled.header`
-  height: 15vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+
 const Title = styled.h1`
   font-size: 48px;
   color: ${(props) => props.theme.accentColor};
+  text-align: center;
+  margin-bottom: 20px;
 `;
+
 const Loader = styled.span`
   font-size: 18px;
   text-align: center;
   display: block;
 `;
 
-const Overview = styled.div`
+const Overview = styled.div<{ $isDark: boolean }>`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) =>
+    props.$isDark ? "rgba(0, 0, 0, 0.5)" : "white"};
   padding: 10px 20px;
   border-radius: 10px;
 `;
@@ -55,6 +63,7 @@ const OverviewItem = styled.div`
 const Description = styled.p`
   font-weight: 300;
   margin: 20px 0px;
+  padding: 0px 20px;
 `;
 
 const Tabs = styled.div`
@@ -64,12 +73,13 @@ const Tabs = styled.div`
   gap: 10px;
 `;
 
-const Tab = styled.span<{ $isActive: boolean }>`
+const Tab = styled.span<{ $isActive: boolean; $isDark: boolean }>`
   text-align: center;
   text-transform: uppercase;
   font-size: 14px;
   font-weight: 400;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${(props) =>
+    props.$isDark ? "rgba(0, 0, 0, 0.5)" : "white"};
   border-radius: 10px;
   padding: 7px 0px;
   color: ${(props) =>
@@ -79,76 +89,10 @@ const Tab = styled.span<{ $isActive: boolean }>`
   }
 `;
 
-// Interface
-
-type IParams = {
-  coinId: string;
-};
-
-interface ILocationState {
-  state: {
-    name: string;
-  };
-}
-
-interface IInfoData {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  is_new: boolean;
-  is_active: boolean;
-  type: string;
-  logo: string;
-  description: string;
-  message: string;
-  open_source: boolean;
-  started_at: Date;
-  development_status: string;
-  hardware_wallet: boolean;
-  proof_type: string;
-  org_structure: string;
-  hash_algorithm: string;
-  first_data_at: Date;
-  last_data_at: Date;
-}
-
-interface IPriceData {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  total_supply: number;
-  max_supply: number;
-  beta_value: number;
-  first_data_at: string;
-  last_updated: string;
-  quotes: {
-    USD: {
-      price: number;
-      volume_24h: number;
-      volume_24h_change_24h: number;
-      market_cap: number;
-      market_cap_change_24h: number;
-      percent_change_15m: number;
-      percent_change_30m: number;
-      percent_change_1h: number;
-      percent_change_6h: number;
-      percent_change_12h: number;
-      percent_change_24h: number;
-      percent_change_7d: number;
-      percent_change_30d: number;
-      percent_change_1y: number;
-      ath_price: number;
-      ath_date: string;
-      percent_from_price_ath: number;
-    };
-  };
-}
-
 // Coin Component
 
 function Coin() {
+  const isDark = useRecoilValue(isDarkAtom);
   const { coinId } = useParams() as IParams;
   const { state } = useLocation() as ILocationState;
   const priceMatch = useMatch("/:coinIn/price");
@@ -166,6 +110,11 @@ function Coin() {
     }
   );
 
+  const { isLoading: ohlcvLoading, data: ohlcvData } = useQuery<IHistorical[]>({
+    queryKey: ["ohlcv", coinId],
+    queryFn: () => fetchCoinHistorical(coinId),
+  });
+
   const loading = infoLoading || tickersLoading;
 
   return (
@@ -181,16 +130,14 @@ function Coin() {
           sizes="16x16"
         />
       </Helmet>
-      <Header>
-        <Title>
-          {state?.name ? state.name : loading ? "loading" : infoData?.name}
-        </Title>
-      </Header>
+      <Title>
+        {state?.name ? state.name : loading ? "loading" : infoData?.name}
+      </Title>
       {loading ? (
         <Loader>Loading...</Loader>
       ) : (
         <>
-          <Overview>
+          <Overview $isDark={isDark}>
             <OverviewItem>
               <span>Rank:</span>
               <span>{infoData?.rank}</span>
@@ -201,29 +148,42 @@ function Coin() {
             </OverviewItem>
             <OverviewItem>
               <span>Price:</span>
-              <span>$ {tickersData?.quotes.USD.price.toFixed(3)}</span>
+              <span>
+                ${" "}
+                {Number(
+                  tickersData?.quotes.USD.price.toFixed(3)
+                ).toLocaleString()}
+              </span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
-          <Overview>
+          <Overview $isDark={isDark}>
             <OverviewItem>
               <span>Total Suply:</span>
-              <span>{tickersData?.total_supply}</span>
+              <span>{tickersData?.total_supply.toLocaleString()}</span>
             </OverviewItem>
             <OverviewItem>
               <span>Max Suply:</span>
-              <span>{tickersData?.max_supply}</span>
+              <span>{tickersData?.max_supply.toLocaleString()}</span>
             </OverviewItem>
           </Overview>
           <Tabs>
-            <Tab $isActive={priceMatch !== null}>
+            <Tab $isDark={isDark} $isActive={priceMatch !== null}>
               <Link to={`/${coinId}/price`}>Price</Link>
             </Tab>
-            <Tab $isActive={chartMatch !== null}>
+            <Tab $isDark={isDark} $isActive={chartMatch !== null}>
               <Link to={`/${coinId}/chart`}>Chart</Link>
             </Tab>
           </Tabs>
-          <Outlet context={{ coinId }} />
+          <Outlet
+            context={{
+              coinId,
+              coinName: infoData?.symbol,
+              coinPrice: tickersData?.quotes.USD.price,
+              ohlcvLoading,
+              ohlcvData,
+            }}
+          />
         </>
       )}
     </Container>

@@ -3,33 +3,30 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
 import { Helmet } from "react-helmet-async";
+import { ICoin } from "../interface";
+import { useRecoilValue } from "recoil";
+import { isDarkAtom } from "../atom";
 
 // styled-components
 
 const Container = styled.div`
   padding: 0px 20px;
-  max-width: 1040px;
+  max-width: 480px;
   margin: 0 auto;
 `;
 const Header = styled.header`
-  height: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+
 const Title = styled.h1`
   font-size: 48px;
   color: ${(props) => props.theme.accentColor};
+  margin-bottom: 20px;
 `;
 
-const CoinList = styled.ul`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding: 0px 20px;
-`;
+const CoinList = styled.ul``;
 
 const Loader = styled.span`
   font-size: 18px;
@@ -37,20 +34,22 @@ const Loader = styled.span`
   display: block;
 `;
 
-const Coin = styled.li`
-  background-color: ${(props) => props.theme.textColor};
-  color: ${(props) => props.theme.bgColor};
+const Coin = styled.li<{ $isDark: boolean }>`
+  background-color: ${(props) =>
+    props.$isDark ? props.theme.textColor : "white"};
+  color: ${(props) =>
+    props.$isDark ? props.theme.bgColor : props.theme.textColor};
   border-radius: 15px;
+  margin-bottom: 10px;
   a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 250px;
-    height: 100px;
-    font-size: 20px;
+    height: 50px;
+    font-size: 18px;
     font-weight: 500;
     text-align: right;
-    padding: 20px 30px;
+    padding: 30px;
     transition: color 0.2s ease-in;
   }
   &:hover {
@@ -66,21 +65,9 @@ const Img = styled.img`
   margin-right: 10px;
 `;
 
-// Interface
-
-interface ICoin {
-  id: string;
-  name: string;
-  symbol: string;
-  rank: number;
-  is_new: boolean;
-  is_active: boolean;
-  type: string;
-}
-
 // Home Components
-
 function Home() {
+  const isDark = useRecoilValue(isDarkAtom);
   const { isLoading, data } = useQuery<ICoin[]>({
     queryKey: ["allCoins"],
     queryFn: fetchCoins,
@@ -99,8 +86,8 @@ function Home() {
       ) : (
         <CoinList>
           {data?.slice(0, 100).map((coin) => (
-            <Coin key={coin.id}>
-              <Link to={`/${coin.id}`} state={{ name: coin.name }}>
+            <Coin $isDark={isDark} key={coin.id}>
+              <Link to={`/${coin.id}/price`} state={{ name: coin.name }}>
                 <Img
                   src={`https://static.coinpaprika.com/coin/${coin.id}/logo.png`}
                   alt={coin.name}
