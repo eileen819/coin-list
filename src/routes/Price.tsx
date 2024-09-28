@@ -18,14 +18,15 @@ const Title = styled.div`
 const Overview = styled.div`
   padding: 10px 20px 20px 20px;
 `;
-const OverviewItem = styled.div`
+const OverviewItem = styled.div<{ $isDark: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
   border-bottom: 1px solid ${(props) => props.theme.textColor};
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: ${(props) =>
+      props.$isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.1)"};
   }
 `;
 
@@ -61,7 +62,7 @@ function Price() {
               <span>{`${year} / ${month} / ${day} Today's Price`}</span>
             </Title>
             <Overview>
-              <OverviewItem>
+              <OverviewItem $isDark={isDark}>
                 <span>High Price</span>
                 <span>
                   US ${" "}
@@ -70,7 +71,7 @@ function Price() {
                   ).toLocaleString()}
                 </span>
               </OverviewItem>
-              <OverviewItem>
+              <OverviewItem $isDark={isDark}>
                 <span>Low Price</span>
                 <span>
                   US ${" "}
@@ -79,7 +80,7 @@ function Price() {
                   ).toLocaleString()}
                 </span>
               </OverviewItem>
-              <OverviewItem>
+              <OverviewItem $isDark={isDark}>
                 <span>Opening Price</span>
                 <span>
                   US ${" "}
@@ -88,7 +89,7 @@ function Price() {
                   ).toLocaleString()}
                 </span>
               </OverviewItem>
-              <OverviewItem>
+              <OverviewItem $isDark={isDark}>
                 <span>Closing Price</span>
                 <span>
                   US ${" "}
