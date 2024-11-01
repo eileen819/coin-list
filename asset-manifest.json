@@ -1,0 +1,10 @@
+{
+  "files": {
+    "main.js": "/coin-list/static/js/main.fe445cee.js",
+    "index.html": "/coin-list/index.html",
+    "main.fe445cee.js.map": "/coin-list/static/js/main.fe445cee.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.fe445cee.js"
+  ]
+}
