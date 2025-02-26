@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { IHeaderProps } from "../interface";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { isDarkAtom } from "../atom";
 
 // styled-components
@@ -71,10 +71,9 @@ function Header() {
   const onGoHome = () => {
     navigate("/");
   };
-  const setIsDark = useSetRecoilState(isDarkAtom);
-  const [toggle, setToggle] = useState(false);
+  const [isDark, setIsDark] = useRecoilState(isDarkAtom);
+
   const onToggle = () => {
-    setToggle((prev) => !prev);
     setIsDark((prev) => !prev);
   };
 
@@ -97,9 +96,9 @@ function Header() {
         </svg>
       </HomeBtn>
 
-      <ModeTabs $isActive={toggle} onClick={onToggle}>
-        <ModeBtn $isActive={toggle}></ModeBtn>
-        <ModeMoonIcon $isActive={toggle}>
+      <ModeTabs $isActive={isDark} onClick={onToggle}>
+        <ModeBtn $isActive={isDark}></ModeBtn>
+        <ModeMoonIcon $isActive={isDark}>
           <svg
             fill="none"
             strokeWidth={1.5}
@@ -115,7 +114,7 @@ function Header() {
             />
           </svg>
         </ModeMoonIcon>
-        <ModeSunIcon $isActive={toggle}>
+        <ModeSunIcon $isActive={isDark}>
           <svg
             fill="none"
             strokeWidth={1.5}

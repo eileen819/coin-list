@@ -76,8 +76,8 @@ function Chart() {
                 yaxis: { show: false },
                 xaxis: {
                   type: "datetime",
-                  categories: ohlcvData?.map((price) =>
-                    new Date(price.time_close * 1000).toUTCString()
+                  categories: parsedData?.map((price) =>
+                    new Date(price.time_close).toUTCString()
                   ),
                 },
                 fill: {
@@ -102,13 +102,10 @@ function Chart() {
                 {
                   name: "ohlc Price",
                   data: parsedData?.map((data) => {
-                    return [
-                      data?.time_close * 1000,
-                      data?.open,
-                      data?.high,
-                      data?.low,
-                      data?.close,
-                    ];
+                    return {
+                      x: new Date(data?.time_close),
+                      y: [data?.open, data?.high, data?.low, data?.close],
+                    };
                   }),
                 },
               ]}
@@ -133,9 +130,33 @@ function Chart() {
                 yaxis: { show: false },
                 xaxis: {
                   type: "datetime",
-                  categories: ohlcvData?.map((price) =>
-                    new Date(price.time_close * 1000).toUTCString()
-                  ),
+                },
+                tooltip: {
+                  shared: true, // 여러 값이 있는 툴팁을 가능하게 설정
+                  custom: function ({
+                    series,
+                    seriesIndex,
+                    dataPointIndex,
+                    w,
+                  }) {
+                    const ohlc =
+                      w.config.series[seriesIndex].data[dataPointIndex].y;
+                    // 'w.globals.series'로 접근하여 OHLC 값을 가져옵니다.
+                    return `
+                      <div style="padding: 10px;">
+                        <b>Open:</b> $${parseFloat(
+                          ohlc[0]
+                        ).toLocaleString()}<br/>
+                        <b>High:</b> $${parseFloat(
+                          ohlc[1]
+                        ).toLocaleString()}<br/>
+                        <b>Low:</b> $${parseFloat(
+                          ohlc[2]
+                        ).toLocaleString()}<br/>
+                        <b>Close:</b> $${parseFloat(ohlc[3]).toLocaleString()}
+                      </div>
+                    `;
+                  },
                 },
               }}
             />
