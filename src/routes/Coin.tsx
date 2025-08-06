@@ -34,6 +34,7 @@ const Title = styled.h1`
 `;
 
 const Loader = styled.span`
+  min-height: 100vh;
   font-size: 18px;
   text-align: center;
   display: block;

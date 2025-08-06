@@ -29,6 +29,7 @@ const Title = styled.h1`
 const CoinList = styled.ul``;
 
 const Loader = styled.span`
+  min-height: 80vh;
   font-size: 18px;
   text-align: center;
   display: block;

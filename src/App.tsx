@@ -9,6 +9,7 @@ import { darkTheme, lightTheme } from "./theme";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "./atom";
 import { ToastContainer } from "react-toastify";
+import Footer from "./components/Footer";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -58,6 +59,7 @@ function App() {
         <GlobalStyle />
         <Header />
         <Outlet />
+        <Footer />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>
     </>
