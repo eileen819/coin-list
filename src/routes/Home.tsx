@@ -34,6 +34,8 @@ const Loader = styled.span`
   display: block;
 `;
 
+const ErrorMessage = styled(Loader)``;
+
 const Coin = styled.li<{ $isDark: boolean }>`
   background-color: ${(props) =>
     props.$isDark ? props.theme.textColor : "white"};
@@ -68,7 +70,7 @@ const Img = styled.img`
 // Home Components
 function Home() {
   const isDark = useRecoilValue(isDarkAtom);
-  const { isLoading, data } = useQuery<ICoin[]>({
+  const { isLoading, data, isError } = useQuery<ICoin[]>({
     queryKey: ["allCoins"],
     queryFn: fetchCoins,
   });
@@ -97,6 +99,11 @@ function Home() {
             </Coin>
           ))}
         </CoinList>
+      )}
+      {isError && (
+        <ErrorMessage>
+          ❗️We couldn't load the data. Please try again later.
+        </ErrorMessage>
       )}
     </Container>
   );

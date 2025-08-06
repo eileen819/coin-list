@@ -39,6 +39,8 @@ const Loader = styled.span`
   display: block;
 `;
 
+const ErrorMessage = styled(Loader)``;
+
 const Overview = styled.div<{ $isDark: boolean }>`
   display: flex;
   justify-content: space-between;
@@ -98,24 +100,35 @@ function Coin() {
   const priceMatch = useMatch("/:coinIn/price");
   const chartMatch = useMatch("/:coinId/chart");
 
-  const { isLoading: infoLoading, data: infoData } = useQuery<IInfoData>({
+  const {
+    isLoading: infoLoading,
+    data: infoData,
+    isError: infoError,
+  } = useQuery<IInfoData>({
     queryKey: ["Info", coinId],
     queryFn: () => fetchCoinInfo(coinId),
   });
 
-  const { isLoading: tickersLoading, data: tickersData } = useQuery<IPriceData>(
-    {
-      queryKey: ["tickers", coinId],
-      queryFn: () => fetchTickersInfo(coinId),
-    }
-  );
+  const {
+    isLoading: tickersLoading,
+    data: tickersData,
+    isError: tickersError,
+  } = useQuery<IPriceData>({
+    queryKey: ["tickers", coinId],
+    queryFn: () => fetchTickersInfo(coinId),
+  });
 
-  const { isLoading: ohlcvLoading, data: ohlcvData } = useQuery<IHistorical[]>({
+  const {
+    isLoading: ohlcvLoading,
+    data: ohlcvData,
+    isError: ohlcvError,
+  } = useQuery<IHistorical[]>({
     queryKey: ["ohlcv", coinId],
     queryFn: () => fetchCoinHistorical(coinId),
   });
 
   const loading = infoLoading || tickersLoading;
+  const fetchingError = infoError || tickersError || ohlcvError;
 
   return (
     <Container>
@@ -133,9 +146,13 @@ function Coin() {
       <Title>
         {state?.name ? state.name : loading ? "loading" : infoData?.name}
       </Title>
-      {loading ? (
-        <Loader>Loading...</Loader>
-      ) : (
+      {fetchingError && (
+        <ErrorMessage>
+          ❗️ We couldn't load the data. Please try again later.
+        </ErrorMessage>
+      )}
+      {loading && !fetchingError && <Loader>Loading...</Loader>}
+      {!loading && !fetchingError && (
         <>
           <Overview $isDark={isDark}>
             <OverviewItem>

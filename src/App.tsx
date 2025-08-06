@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import { darkTheme, lightTheme } from "./theme";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "./atom";
+import { ToastContainer } from "react-toastify";
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -48,6 +49,12 @@ function App() {
             rel="stylesheet"
           />
         </Helmet>
+        <ToastContainer
+          theme={isDark ? "dark" : "light"}
+          autoClose={1000}
+          hideProgressBar
+          newestOnTop
+        />
         <GlobalStyle />
         <Header />
         <Outlet />
