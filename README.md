@@ -8,7 +8,7 @@
 ## 📌 프로젝트 개요
 
 - **Coin List**는 **실시간 암호 화폐 정보를 제공**하는 웹 어플리케이션입니다.
-- React, Typescript 및 다양한 라이브러리의 학습을 위해 개발되었으며, 사용자가 **다양한 암호 화폐의 가격 변동 내역을 쉽게 확인**할 수 있도록 설계되었습니다.
+- React의 컴포넌트 기반 아키텍처를 효과적으로 활용하고, TypeScript를 통한 타입 안정성을 확보하는 것에 중점을 두며 개발되었으며, 사용자가 **다양한 암호 화폐의 가격 변동 내역을 쉽게 확인**할 수 있도록 설계되었습니다.
 - **차트 및 컨버터 기능**을 통해 데이터를 직관적으로 이해할 수 있도록 하였으며, **다크 모드 지원 및 모바일 최적화 UI**를 제공하여 사용자의 편의성도 극대화하였습니다.
 
 <br/>
@@ -19,13 +19,13 @@
 
 - 현재 암호 화폐의 가격, 순위를 실시간으로 확인 가능
 - 오늘의 High, Low, Opening, Closing 가격 확인 가능
-- `React-Query`를 활용해 API 데이터를 페칭
+- 실시간 암호 화폐 데이터를 페칭하고 캐싱하여 빠른 UX 제공 (`React-Query(Tanstack-Query)` 사용)
 - `Apex Chart`를 사용한 라인 차트 & 캔들 차트 제공 (지난 3주간 데이터 확인 가능)
 
 ### ✅ 코인 & USD 변환 기능 (컨버터)
 
 - **암호 화폐 ↔ USD** 간 변환 지원
-- `useState` 활용하여 상태 관리하며, 실시간 환율을 반영함
+- `useState` 활용하여 상태 관리하며, **실시간 환율을 반영함**
 
 ### ✅ 다크 모드 지원
 
@@ -42,7 +42,7 @@
 ## 🔎 역할과 기여도
 
 - 개인 프로젝트로 기획, 설계, 개발 및 배포까지 **전 과정을 담당**
-- 강의를 통해 배운 것들을 바탕으로 기본 기능을 구현한 후, **추가적인 기능을 직접 개발**하여 확장
+- 강의를 통해 배운 것들을 바탕으로 기본 기능을 구현한 후, 실사용자 관점을 반영하여 **캔들 차트 구현, 컨버터 기능, 모바일 최적화 UI** 등을 직접 기획하고 개발하여 프로젝트를 확장
 - **React + TypeScript 기반으로 프로젝트 아키텍처 설계**
 - **Apex Chart를 활용한 차트 시각화**
 - **React-Query 및 Recoil을 활용한 상태 관리 적용**
@@ -52,13 +52,13 @@
 
 ## 🛠️ 사용한 기술 스택
 
-| 분류                 | 기술                                                                            |
-| -------------------- | ------------------------------------------------------------------------------- |
-| **Frontend**         | React, Javascript, Typescript, React-Router-Dom, Apex Chart, React-Helmet-Async |
-| **State Management** | Recoil, React-Query(Tanstack-Query)                                             |
-| **Styling**          | Styled-Components, Styled-Reset                                                 |
-| **API & Data**       | coinpaprica API, nomadcoders API                                                |
-| **Deployment**       | gh-pages                                                                        |
+| 분류                 | 기술                                                                |
+| -------------------- | ------------------------------------------------------------------- |
+| **Frontend**         | React, Typescript, React-Router-Dom, Apex Chart, React-Helmet-Async |
+| **State Management** | Recoil, React-Query(Tanstack-Query)                                 |
+| **Styling**          | Styled-Components, Styled-Reset                                     |
+| **API & Data**       | coinpaprica API, nomadcoders API                                    |
+| **Deployment**       | gh-pages                                                            |
 
 <br/>
 
@@ -107,7 +107,8 @@ $ npm start
 
 ## 🔄 개선 예정 기능 (업데이트 계획)
 
-_추후 추가 예정_
+- 즐겨찾기(북마크) 기능
+- 사용자 맞춤 단위(%, 원, 달러) 표시 옵션
 
 <br/>
 
@@ -115,29 +116,28 @@ _추후 추가 예정_
 
 ### 📍 React + TypeScript 기반 프로젝트 아키텍처 설계
 
-- `Create-React-App`을 사용하여 프로젝트 아키텍처를 설계
-- TypeScript를 적용하여 안정적인 컴포넌트 설계
-- Props 및 State의 타입을 정의하여 **런타임 오류 방지 및 코드 가독성 향상**
+- `Create-React-App`을 사용하여 React 기반의 프로젝트 아키텍처를 설계하고, TypeScript를 적용하여 안정적인 컴포넌트 설계하는 방식을 경험
+- Props 및 State의 타입을 정의하여 **런타임 오류 방지 및 코드 가독성 향상**시킴
 
 ### 📍 Styled-Components를 활용한 UI 설계
 
-- **CSS-in-JS 방식**을 사용하여 컴포넌트 기반의 스타일링 적용
-- **다크 모드 지원을 위해 `ThemeProvider`를 활용**
-- `createGlobalStyle`을 사용해 전역 스타일을 관리
+- **CSS-in-JS 방식**을 사용하여 컴포넌트 기반의 스타일링 적용함
+- **`ThemeProvider`와 `createGlobalStyle`을 활용**하여 전역 테마 시스템을 구현할 수 있었음
 
 ### 📍 React-Query(Tanstack-Query) 및 Recoil을 활용한 상태 관리
 
-- API 데이터 페칭 및 캐싱 적용
-- 글로벌 상태 관리 및 다크 모드 구현, 사용자 설정 유지
+- `useQuery`를 활용하여 비동기 데이터 페칭 및 캐싱으로 사용자 친화적 UX를 구현함
+- React-Query(Tanstack-Query)의 사용은 기존의 `useEffect + fetch`를 이용한 비동기 데이터 관리보다 비동기 로직과 캐싱/에러/로딩 상태를 통합적으로 처리할 수 있어 생산성과 유지보수성이 향상됨을 체감
+- `Recoil`의 `atom`을 활용하여 글로벌 상태를 관리하며, `localStorage`를 통한 사용자 설정을 유지하도록 구현할 수 있었음
 
 ### 📍 Apex Chart를 활용한 차트 구현
 
-- `ApexChart`를 활용하여 **실시간 암호화폐 가격 데이터를 차트로 시각화**
-- **라인 차트 & 캔들 차트 구성**
+- `ApexChart`의 `chart`컴포넌트를 활용하여 쉽게 **라인 차트 & 캔들 차트**를 구현함
+- **실시간 암호화폐 가격 데이터를 차트로 시각화**하는 방법을 학습함
 
 ### 📍 GitHub Pages를 활용한 배포
 
-- `gh-pages` 라이브러리를 이용하여 **정적 React 앱 배포**
+- `gh-pages`패키지를 사용하여 간편하게 **정적 React 앱 배포**하는 방법을 학습
 
   <br/>
 
