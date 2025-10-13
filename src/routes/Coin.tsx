@@ -18,6 +18,7 @@ import {
 } from "../interface";
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "../atom";
+import { useMemo, useState } from "react";
 
 // styled-components
 const Container = styled.div`
@@ -69,6 +70,15 @@ const Description = styled.p`
   padding: 0px 20px;
 `;
 
+const MoreDescription = styled.button`
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  color: #9c88ff;
+`;
+
 const Tabs = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -101,6 +111,8 @@ function Coin() {
   const priceMatch = useMatch("/:coinIn/price");
   const chartMatch = useMatch("/:coinId/chart");
 
+  const [expanded, setExpanded] = useState(false);
+
   const {
     isLoading: infoLoading,
     data: infoData,
@@ -127,6 +139,16 @@ function Coin() {
     queryKey: ["ohlcv", coinId],
     queryFn: () => fetchCoinHistorical(coinId),
   });
+
+  const description = infoData?.description ?? "";
+  const isLong = description?.length > 300;
+  const showText = useMemo(() => {
+    if (!description) return "";
+    if (!expanded && isLong) {
+      return description.slice(0, 300) + "...";
+    }
+    return description;
+  }, [description, expanded, isLong]);
 
   const loading = infoLoading || tickersLoading;
   const fetchingError = infoError || tickersError || ohlcvError;
@@ -174,7 +196,18 @@ function Coin() {
               </span>
             </OverviewItem>
           </Overview>
-          <Description>{infoData?.description}</Description>
+          <Description>
+            {showText}
+            {isLong && (
+              <MoreDescription
+                onClick={() => {
+                  setExpanded((prev) => !prev);
+                }}
+              >
+                {expanded ? "Close" : "More"}
+              </MoreDescription>
+            )}
+          </Description>
           <Overview $isDark={isDark}>
             <OverviewItem>
               <span>Total Suply:</span>

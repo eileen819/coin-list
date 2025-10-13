@@ -19,7 +19,7 @@
 
 - 현재 암호 화폐의 가격, 순위를 실시간으로 확인 가능
 - 오늘의 High, Low, Opening, Closing 가격 확인 가능
-- 실시간 암호 화폐 데이터를 페칭하고 캐싱하여 빠른 UX 제공 (`React-Query(Tanstack-Query)` 사용)
+- 실시간 암호 화폐 데이터를 페칭하고 캐싱하여 빠른 UX 제공 (`TanStack Query(구 React-Query)` 사용)
 - `Apex Chart`를 사용한 라인 차트 & 캔들 차트 제공 (지난 3주간 데이터 확인 가능)
 
 ### ✅ 코인 & USD 변환 기능 (컨버터)
@@ -45,7 +45,7 @@
 - 강의를 통해 배운 것들을 바탕으로 기본 기능을 구현한 후, 실사용자 관점을 반영하여 **캔들 차트 구현, 컨버터 기능, 모바일 최적화 UI** 등을 직접 기획하고 개발하여 프로젝트를 확장
 - **React + TypeScript 기반으로 프로젝트 아키텍처 설계**
 - **Apex Chart를 활용한 차트 시각화**
-- **React-Query 및 Recoil을 활용한 상태 관리 적용**
+- **TanStack Query 및 Recoil을 활용한 상태 관리 적용**
 - **GitHub Pages를 활용한 배포**
 
   <br/>
@@ -55,7 +55,7 @@
 | 분류                 | 기술                                                                |
 | -------------------- | ------------------------------------------------------------------- |
 | **Frontend**         | React, Typescript, React-Router-Dom, Apex Chart, React-Helmet-Async |
-| **State Management** | Recoil, React-Query(Tanstack-Query)                                 |
+| **State Management** | Recoil, TanStack Query(구 React-Query)                              |
 | **Styling**          | Styled-Components, Styled-Reset                                     |
 | **API & Data**       | coinpaprica API, nomadcoders API                                    |
 | **Deployment**       | gh-pages                                                            |
@@ -97,10 +97,15 @@ React 애플리케이션을 정적 파일로 빌드한 후, `gh-pages` 브랜치
 **프로젝트 클론**
 
 ```bash
-$ git clone https://github.com/eileen819/coin-list.git
-$ cd coin-list
-$ npm install
-$ npm start
+# 프로젝트 클론
+git clone https://github.com/eileen819/coin-list.git
+cd coin-list
+
+# 의존성 설치
+npm install
+
+# 개발 서버 실행
+npm start
 ```
 
   <br/>
@@ -124,10 +129,10 @@ $ npm start
 - **CSS-in-JS 방식**을 사용하여 컴포넌트 기반의 스타일링 적용함
 - **`ThemeProvider`와 `createGlobalStyle`을 활용**하여 전역 테마 시스템을 구현할 수 있었음
 
-### 📍 React-Query(Tanstack-Query) 및 Recoil을 활용한 상태 관리
+### 📍 TanStack Query(구 React-Query) 및 Recoil을 활용한 상태 관리
 
 - `useQuery`를 활용하여 비동기 데이터 페칭 및 캐싱으로 사용자 친화적 UX를 구현함
-- React-Query(Tanstack-Query)의 사용은 기존의 `useEffect + fetch`를 이용한 비동기 데이터 관리보다 비동기 로직과 캐싱/에러/로딩 상태를 통합적으로 처리할 수 있어 생산성과 유지보수성이 향상됨을 체감
+- TanStack Query의 사용은 기존의 `useEffect + fetch`를 이용한 비동기 데이터 관리보다 비동기 로직과 캐싱/에러/로딩 상태를 통합적으로 처리할 수 있어 생산성과 유지보수성이 향상됨을 체감
 - `Recoil`의 `atom`을 활용하여 글로벌 상태를 관리하며, `localStorage`를 통한 사용자 설정을 유지하도록 구현할 수 있었음
 
 ### 📍 Apex Chart를 활용한 차트 구현
