@@ -76,7 +76,7 @@ const MoreDescription = styled.button`
   background-color: transparent;
   border: none;
   outline: none;
-  font-weight: 600;
+  font-weight: 500;
   color: #9c88ff;
 `;
 

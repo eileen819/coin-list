@@ -17,6 +17,10 @@ const Title = styled.div`
 `;
 const Overview = styled.div`
   padding: 10px 20px 20px 20px;
+
+  @media (max-width: 600px) {
+    padding: 10px;
+  }
 `;
 const OverviewItem = styled.div<{ $isDark: boolean }>`
   display: flex;

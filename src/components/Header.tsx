@@ -11,6 +11,10 @@ const Wrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media (max-width: 600px) {
+    padding: 0 20px;
+  }
 `;
 
 const HomeBtn = styled.button`

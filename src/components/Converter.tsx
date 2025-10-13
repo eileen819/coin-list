@@ -51,6 +51,10 @@ const Input = styled.input`
   &:focus {
     border-bottom: 1px solid ${(props) => props.theme.accentColor};
   }
+
+  @media (max-width: 600px) {
+    width: 200px;
+  }
 `;
 const BtnWrapper = styled.div`
   display: flex;
