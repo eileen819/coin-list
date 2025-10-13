@@ -79,7 +79,7 @@ function Home() {
   return (
     <Container>
       <Helmet>
-        <title>Coins</title>
+        <title>Coin List | 실시간 코인 정보</title>
       </Helmet>
       <Header>
         <Title>Coins</Title>

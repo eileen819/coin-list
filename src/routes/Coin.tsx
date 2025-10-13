@@ -158,7 +158,11 @@ function Coin() {
     <Container>
       <Helmet>
         <title>
-          {state?.name ? state.name : loading ? "loading" : infoData?.name}
+          {state?.name
+            ? `Coin List | ${state.name}`
+            : loading
+            ? "Loading"
+            : `Coin List | ${infoData?.name}`}
         </title>
         <link
           rel="icon"
