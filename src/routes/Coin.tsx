@@ -68,6 +68,7 @@ const Description = styled.p`
   font-weight: 300;
   margin: 20px 0px;
   padding: 0px 20px;
+  line-height: 1.2;
 `;
 
 const MoreDescription = styled.button`

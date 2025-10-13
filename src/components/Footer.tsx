@@ -10,15 +10,25 @@ const Container = styled.div`
   font-size: 14px;
 `;
 
+const Copyright = styled.p`
+  color: #718093;
+`;
+
 const LinkTo = styled.a`
   margin-left: 10px;
+  color: gray;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    color: #9c88ff;
+  }
 `;
 
 function Footer() {
   const year = new Date().getFullYear();
   return (
     <Container>
-      <p>&copy;{year} Eileen. All rights reserved.</p>
+      <Copyright>&copy;{year} Eileen. All rights reserved.</Copyright>
       <LinkTo
         href="https://github.com/eileen819"
         target="_blank"
