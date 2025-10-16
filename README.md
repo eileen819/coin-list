@@ -1,7 +1,7 @@
 # 📈 Coin-List
 
-사이트 주소와 화면 캡쳐해서 넣기  
-🔗 **배포 주소:** [Coin List](https://eileen819.github.io/coin-list)
+![UI Preview](./public/preview.png)
+🔗 **Demo:** [Coin List](https://eileen819.github.io/coin-list)
 
 <br/>
 
@@ -68,6 +68,7 @@
 src
  ┣ components
  ┃ ┣ Converter.tsx
+ ┃ ┣ Footer.tsx
  ┃ ┗ Header.tsx
  ┣ routes
  ┃ ┣ Chart.tsx
@@ -124,10 +125,14 @@ npm start
 - `Create-React-App`을 사용하여 React 기반의 프로젝트 아키텍처를 설계하고, TypeScript를 적용하여 안정적인 컴포넌트 설계하는 방식을 경험
 - Props 및 State의 타입을 정의하여 **런타임 오류 방지 및 코드 가독성 향상**시킴
 
+---
+
 ### 📍 Styled-Components를 활용한 UI 설계
 
 - **CSS-in-JS 방식**을 사용하여 컴포넌트 기반의 스타일링 적용함
 - **`ThemeProvider`와 `createGlobalStyle`을 활용**하여 전역 테마 시스템을 구현할 수 있었음
+
+---
 
 ### 📍 TanStack Query(구 React-Query) 및 Recoil을 활용한 상태 관리
 
@@ -135,10 +140,14 @@ npm start
 - TanStack Query의 사용은 기존의 `useEffect + fetch`를 이용한 비동기 데이터 관리보다 비동기 로직과 캐싱/에러/로딩 상태를 통합적으로 처리할 수 있어 생산성과 유지보수성이 향상됨을 체감
 - `Recoil`의 `atom`을 활용하여 글로벌 상태를 관리하며, `localStorage`를 통한 사용자 설정을 유지하도록 구현할 수 있었음
 
+---
+
 ### 📍 Apex Chart를 활용한 차트 구현
 
 - `ApexChart`의 `chart`컴포넌트를 활용하여 쉽게 **라인 차트 & 캔들 차트**를 구현함
 - **실시간 암호화폐 가격 데이터를 차트로 시각화**하는 방법을 학습함
+
+---
 
 ### 📍 GitHub Pages를 활용한 배포
 
