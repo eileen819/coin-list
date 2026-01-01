@@ -10,7 +10,7 @@
 ## 📌 프로젝트 개요
 
 - **Coin List**는 **실시간 암호 화폐 정보를 제공**하는 웹 어플리케이션입니다.
-- React의 컴포넌트 기반 아키텍처를 효과적으로 활용하고, Typescript를 통한 타입 안정성을 확보하는 것에 중점을 두며 개발되었으며, 사용자가 **다양한 암호 화폐의 가격 변동 내역을 쉽게 확인**할 수 있도록 설계되었습니다.
+- React의 컴포넌트 기반 아키텍처를 효과적으로 활용하고, TypeScript를 통한 타입 안정성을 확보하는 것에 중점을 두며 개발되었으며, 사용자가 **다양한 암호 화폐의 가격 변동 내역을 쉽게 확인**할 수 있도록 설계되었습니다.
 - **차트 및 컨버터 기능**을 통해 데이터를 직관적으로 이해할 수 있도록 하였으며, **다크 모드 지원 및 모바일 최적화 UI**를 제공하여 사용자의 편의성도 극대화하였습니다.
 
 <br/>
@@ -45,7 +45,7 @@
 
 - 개인 프로젝트로 **기획, 설계, 개발 및 배포까지 전 과정을 담당**
 - 강의를 통해 배운 것들을 바탕으로 기본 기능을 구현한 후, 실사용자 관점을 반영하여 **캔들 차트 구현, 컨버터 기능, 모바일 최적화 UI** 등을 직접 기획하고 개발하여 프로젝트를 확장
-- **React + Typescript 기반으로 프로젝트 아키텍처 설계**
+- **React + TypeScript 기반으로 프로젝트 아키텍처 설계**
 - **ApexCharts를 활용한 차트 시각화**
 - **TanStack Query 및 Recoil을 활용한 상태 관리 적용**
 - **GitHub Pages를 활용한 배포**
@@ -86,8 +86,8 @@ src
 
 | 분류                 | 기술                                                                |
 | -------------------- | ------------------------------------------------------------------- |
-| **Frontend**         | React, Typescript, React-Router-Dom, ApexCharts, React-Helmet-Async |
-| **State Management** | Recoil, TanStack Query(구 React-Query)                              |
+| **Frontend**         | React, TypeScript, React-Router-Dom, ApexCharts, React-Helmet-Async |
+| **State Management** | Recoil, TanStack Query                              |
 | **Styling**          | styled-components, Styled-Reset                                     |
 | **API Integration**  | coinpaprica API, nomadcoders API                                    |
 | **Deployment**       | gh-pages                                                            |
@@ -137,9 +137,9 @@ npm start
 
 ## 📚 기술적 학습 및 인사이트
 
-### 📍 React + Typescript 기반 프로젝트 아키텍처 설계
+### 📍 React + TypeScript 기반 프로젝트 아키텍처 설계
 
-- Create-React-App을 사용하여 React 기반의 프로젝트 아키텍처를 설계하고, Typescript를 적용하여 안정적인 컴포넌트 설계하는 방식을 경험
+- Create-React-App을 사용하여 React 기반의 프로젝트 아키텍처를 설계하고, TypeScript를 적용하여 안정적인 컴포넌트 설계하는 방식을 경험
 - Props 및 State의 타입을 정의하여 런타임 오류 방지 및 코드 가독성 향상시킴
 
 ### 📍 styled-components를 활용한 UI 설계
