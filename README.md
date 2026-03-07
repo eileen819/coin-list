@@ -2,8 +2,8 @@
 
 ### 🔈 전 세계 암호화폐의 실시간 시세와 상세 정보를 확인하세요.
 
-![UI Preview](./public/preview.png)
 🔗 **Demo:** [Coin List](https://eileen819.github.io/coin-list)
+![UI Preview](./public/images/coin-scs.png)
 
 <br/>
 
@@ -16,6 +16,8 @@
 <br/>
 
 ## 💡 주요 기능
+
+![UI Preview](./public/images/coin-scs2.png)
 
 ### ✅ 실시간 코인 가격 및 차트 제공
 
@@ -54,7 +56,7 @@
 
 ## 🏗️ 시스템 아키텍처
 
-![Architecture Diagram](./public/architecture.png)  
+![Architecture Diagram](./public/images/architecture.png)  
  <br/>
 
 ## 📁 프로젝트 구조
@@ -87,7 +89,7 @@ src
 | 분류                 | 기술                                                                |
 | -------------------- | ------------------------------------------------------------------- |
 | **Frontend**         | React, TypeScript, React-Router-Dom, ApexCharts, React-Helmet-Async |
-| **State Management** | Recoil, TanStack Query                              |
+| **State Management** | Recoil, TanStack Query                                              |
 | **Styling**          | styled-components, Styled-Reset                                     |
 | **API Integration**  | coinpaprica API, nomadcoders API                                    |
 | **Deployment**       | gh-pages                                                            |
